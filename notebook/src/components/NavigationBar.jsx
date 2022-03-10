@@ -1,18 +1,20 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from "../styling/colors";
 import { RouteConfig } from "../config/RouteConfig";
+import TimerContext from "../context/TimerProvider";
 
 const NavigationBarContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	background-color: ${props => props.page === '/' ? "none" : colors.purple};
+	background-color: ${props => props.color ? props.color : colors.purple};
 	height: 60px;
 	align-items: center;
 	color: white;
   justify-content: space-between;
+  transition: .2s ease-in-out;
 `;
 
 const Title = styled.div`
@@ -36,6 +38,9 @@ const Icon = styled.div`
   &:hover {
     color: ${colors.yellow};
   }
+  &:visited {
+    color: none;
+  }
 `;
 
 const Button = styled.div`
@@ -47,14 +52,18 @@ const Button = styled.div`
 `;
 
 export default function NavigationBar(props){
+  const { timer } = useContext(TimerContext);
 
-  const [page, setPage] = useState();
-
-  let location = useLocation();
+  const location = useLocation();
+  const [color, setColor] = useState(null);
 
   useEffect(()=> {
-    setPage(window.location.pathname);
-  }, [location]);
+    if (window.location.pathname === '/') {
+      setColor(timer.color)
+    } else {
+      setColor(null)
+    } 
+  }, [location, timer]);
 
   const getIcons = (()=> {
     return (
@@ -62,7 +71,8 @@ export default function NavigationBar(props){
         <NavLink 
           to={component.path}
           style={({ isActive }) => ({
-            color: isActive ? colors.yellow : colors.white,
+            color: isActive ? colors.yellow : 'white',
+            textDecoration: 'none'
           })}
           >
             <Icon>{component.icon}</Icon>
@@ -72,7 +82,7 @@ export default function NavigationBar(props){
   });
 
   return (
-    <NavigationBarContainer page={page}>
+    <NavigationBarContainer color={color}>
       <Title>notebook</Title>
       <IconContainers>{getIcons()}</IconContainers>
       <Button>login</Button>

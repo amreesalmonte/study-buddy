@@ -6,4 +6,4 @@ export default function FlashcardsView(props){
   return (
       <>flashcards</>
   );
-}
+};

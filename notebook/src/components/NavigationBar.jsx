@@ -38,9 +38,6 @@ const Icon = styled.div`
   &:hover {
     color: ${colors.yellow};
   }
-  &:visited {
-    color: none;
-  }
 `;
 
 const Button = styled.div`

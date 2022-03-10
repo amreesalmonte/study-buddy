@@ -1,10 +1,19 @@
-import './App.css';
+import React, { useContext } from "react";
+import { Routes, Route } from 'react-router-dom';
+import { RouteConfig } from "./config/RouteConfig";
 
-function App() {
+export default function App() {
+  const getRoutes = (() => {
+    return (
+      RouteConfig.map((component, index) => (
+        <Route key={index} path={component.path} element={component.element}/>
+      ))
+    )
+  })
+
   return (
-    <div className="App">
-    </div>
+    <Routes>
+      {getRoutes()}
+    </Routes>
   );
 }
-
-export default App;

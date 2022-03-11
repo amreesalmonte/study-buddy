@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { PlayArrow, Pause, SkipNext } from '@mui/icons-material';
 import TimerContext from "../context/TimerProvider";
 import { colors } from "../styling/colors";
+import { LargeIcon } from "../styling/styles";
 
 const PomodoroContainer = styled.div`
   color: white;
@@ -24,15 +25,10 @@ const IconContainers = styled.div`
   justify-content: center;
 `;
 
-const Icon = styled.div`
-  margin: 20px;
-  transition: .2s ease-in-out;
-  svg {
-      width: 64px;
-      height: 64px;
-  }
+const StyledLargeIcon = styled(LargeIcon)`
   &:hover {
     color: ${colors.yellow};
+    cursor: pointer;
   }
 `;
 
@@ -78,10 +74,10 @@ export default function PomodoroView(props){
         <TimerText>25:00</TimerText>
         <IconContainers>
           {isActive ? 
-          <Icon><Pause onClick={togglePlay}/></Icon> : 
-          <Icon><PlayArrow onClick={togglePlay}/></Icon>
+          <StyledLargeIcon><Pause onClick={togglePlay}/></StyledLargeIcon> : 
+          <StyledLargeIcon><PlayArrow onClick={togglePlay}/></StyledLargeIcon>
           }
-          <Icon><SkipNext onClick={handleNext}/></Icon>
+          <StyledLargeIcon><SkipNext onClick={handleNext}/></StyledLargeIcon>
         </IconContainers>
       </PomodoroContainer>
   );

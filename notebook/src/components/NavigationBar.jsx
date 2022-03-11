@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { colors } from "../styling/colors";
 import { RouteConfig } from "../config/RouteConfig";
 import TimerContext from "../context/TimerProvider";
+import { SmallIcon } from "../styling/styles";
 
 const NavigationBarContainer = styled.div`
 	display: flex;
@@ -15,6 +16,7 @@ const NavigationBarContainer = styled.div`
 	color: white;
   justify-content: space-between;
   transition: .2s ease-in-out;
+  position: fixed;
 `;
 
 const Title = styled.div`
@@ -28,13 +30,7 @@ const IconContainers = styled.div`
   justify-content: center;
 `;
 
-const Icon = styled.div`
-  margin: 20px;
-  transition: .2s ease-in-out;
-  svg {
-      width: 30px;
-      height: 30px;
-  }
+const StyledSmallIcon = styled(SmallIcon)`
   &:hover {
     color: ${colors.yellow};
   }
@@ -72,7 +68,7 @@ export default function NavigationBar(props){
             textDecoration: 'none'
           })}
           >
-            <Icon>{component.icon}</Icon>
+            <StyledSmallIcon>{component.icon}</StyledSmallIcon>
           </NavLink>
         )
     );

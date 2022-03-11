@@ -7,13 +7,22 @@ const ProjectsContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-top: 50px;
 `;
+
+const ProjectsContent = styled.div`
+  max-width: 800px;
+  width: 80%;
+`;
+
 
 export default function ProjectsListView(props){
 
   return (
       <ProjectsContainer>
-        projects
+        <ProjectsContent>
+          projects
+        </ProjectsContent>
         <Footer>
           <PrimaryButton>create new</PrimaryButton>
         </Footer>

@@ -5,33 +5,40 @@ import { colors } from "../styling/colors";
 import { PrimaryButton, Footer, ListItem} from "../styling/styles";
 
 const FlashcardsContainer = styled.div`
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 100px;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 100px;
+`;
+
+const FlashcardsContent = styled.div`
+	max-width: 800px;
+	width: 80%;
 `;
 
 const Icon = styled.div`
-  transition: .2s ease-in-out;
-  margin-right: 10px;
-  color: ${colors.purple};
-  svg {
-      width: 40px;
-      height: 40px;
-  }
+	transition: .2s ease-in-out;
+	margin-right: 10px;
+	color: ${colors.purple};
+	svg {
+		width: 40px;
+		height: 40px;
+	}
 `;
 
 export default function FlashcardsListView(props){
-  return (
-      <FlashcardsContainer>
-        <ListItem>
-          <Icon><Article/></Icon>
-          flashcards
-        </ListItem>
-        <Footer>
-          <PrimaryButton>create new</PrimaryButton>
-        </Footer>
-      </FlashcardsContainer>
-  );
+	return (
+		<FlashcardsContainer>
+			<FlashcardsContent>
+				<ListItem>
+					<Icon><Article/></Icon>
+					flashcards
+				</ListItem>
+			</FlashcardsContent>
+			<Footer>
+				<PrimaryButton>create new</PrimaryButton>
+			</Footer>
+		</FlashcardsContainer>
+	);
 };

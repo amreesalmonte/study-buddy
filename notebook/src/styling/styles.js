@@ -89,7 +89,7 @@ export const PrimaryButton = styled.div`
 `;
 
 export const SecondaryButton = styled.div`
-	background-color: ${colors.red};
+	background-color: ${props => props.disabled ? colors.grey01 : colors.red};
 	color: white;
 	width: 150px;
 	height: 20px;

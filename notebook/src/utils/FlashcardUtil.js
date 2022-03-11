@@ -1,5 +1,5 @@
 import { db } from "../services/firebase"
-import { collection, doc, setDoc, query, getDocs, where } from "firebase/firestore";
+import { collection, doc, addDoc, setDoc, deleteDoc, query, getDocs, where } from "firebase/firestore";
 
 export const fetchFlashcards = (async(uid, deck) => {
 	const q = query(collection(db, "flashcards"),
@@ -34,4 +34,32 @@ export const fetchDecks = (async(uid) => {
 	});
 
 	return data;
+})
+
+export const createDeck = (async(uid, deck, cards) => {
+	cards.forEach(async(card) => {
+		await addDoc(collection(db, "flashcards"), {
+			answer: card.answer,
+			deck: deck,
+			question: card.question,
+			uid: uid
+		});
+	});
+})
+
+export const updateDeck = (async(uid, deck, cards) => {
+	cards.forEach(async(card) => {
+		await setDoc(collection(db, "flashcards", card.id), {
+			answer: card.answer,
+			deck: deck,
+			question: card.question,
+			uid: uid
+		});
+	});
+})
+
+export const deleteDeck = (async(cards) => {
+	cards.forEach(async(card) => {
+		await deleteDoc(doc(db, "flashcards", card.id));
+	});
 })

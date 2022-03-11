@@ -66,7 +66,9 @@ export default function FlashcardsListView(props){
 				{getList()}
 			</FlashcardsContent>
 			<Footer>
-				<PrimaryButton>create new</PrimaryButton>
+				<NavLink to={`/flashcards/new`} style={{textDecoration: 'none'}}>
+					<PrimaryButton>create new</PrimaryButton>
+				</NavLink>
 			</Footer>
 		</FlashcardsContainer>
 	);

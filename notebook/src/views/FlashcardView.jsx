@@ -28,6 +28,15 @@ export default function FlashcardView(props){
 		if (initialLoad && params.deck !== 'new') {
 			fetchData();
 			setInitialLoad(false);
+		} else if (initialLoad && params.deck === 'new') {
+			const blankDeck = [
+				{
+					question: '',
+					answer: ''
+				}
+			]
+			setCards(blankDeck);
+			setEdit(true);
 		}
 	}, [initialLoad, fetchData, params]);
 
@@ -53,9 +62,9 @@ export default function FlashcardView(props){
 
 	return (
 		<>
-		{edit && <EditFlashcards handleSave={toggleEdit}/>}
+		{edit && <EditFlashcards cards={cards} deck={params.deck} toggleEdit={toggleEdit} handleBack={handleBack}/>}
 		{review && <ReviewFlashcards cards={cards} deck={params.deck} handleExit={toggleReview}/>}
-		{!edit && !review && <ReadFlashcards cards={cards} deck={params.deck} handleEdit={toggleEdit} handleReview={toggleReview} handleBack={handleBack }/>}
+		{!edit && !review && <ReadFlashcards cards={cards} deck={params.deck} handleEdit={toggleEdit} handleReview={toggleReview} handleBack={handleBack}/>}
 		</>
 	);
 };

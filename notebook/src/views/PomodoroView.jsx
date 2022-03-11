@@ -12,6 +12,7 @@ const PomodoroContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transition: .2s ease-in-out;
 `;
 
 const TimerText = styled.div`

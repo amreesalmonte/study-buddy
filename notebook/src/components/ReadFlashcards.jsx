@@ -32,12 +32,12 @@ const StyledLargeIcon = styled(LargeIcon)`
 `;
 
 export default function ReadFlashcards(props){
-	const { handleEdit } = props;
+	const { handleEdit, handleBack } = props;
 
 	return (
 		<FlashcardContainer>
 		  <FlashcardContent>
-			<BackButton><ArrowBack/>back</BackButton>
+			<BackButton onClick={handleBack}><ArrowBack/>back</BackButton>
 			<Header>
 			  <Title>
 				<StyledLargeIcon><Article/></StyledLargeIcon>

@@ -59,8 +59,9 @@ export default function NavigationBar(props){
   }, [location, timer]);
 
   const getIcons = (()=> {
+    const routes = RouteConfig.filter((route) => {return route.icon !== null})
     return (
-        RouteConfig.map((component, index) => 
+      routes.map((component, index) => 
         <NavLink 
           to={component.path}
           style={({ isActive }) => ({

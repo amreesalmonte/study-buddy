@@ -8,9 +8,15 @@ import { Folder, Article, Timer } from '@mui/icons-material';
 export const RouteConfig = [
     {
         title: 'flashcards',
-        element: <FlashcardView />,
+        element: <FlashcardsListView />,
         path: '/flashcards',
         icon: <Article />
+    },
+    {
+        title: 'flashcard',
+        element: <FlashcardView />,
+        path: '/flashcards/:id',
+        icon: null
     },
     {
         title: 'pomodoro',

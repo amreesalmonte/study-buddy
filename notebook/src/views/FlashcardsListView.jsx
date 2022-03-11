@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import { Article } from '@mui/icons-material';
 import { colors } from "../styling/colors";
@@ -28,10 +29,16 @@ const Icon = styled.div`
 `;
 
 export default function FlashcardsListView(props){
+	let navigate = useNavigate();
+
+	const handleSelect = useCallback((title) => {
+		navigate('/flashcards/1');
+	}, [navigate])
+
 	return (
 		<FlashcardsContainer>
 			<FlashcardsContent>
-				<ListItem>
+				<ListItem onClick={handleSelect}>
 					<Icon><Article/></Icon>
 					flashcards
 				</ListItem>

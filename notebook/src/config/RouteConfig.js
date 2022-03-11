@@ -15,7 +15,7 @@ export const RouteConfig = [
     {
         title: 'flashcard',
         element: <FlashcardView />,
-        path: '/flashcards/:id',
+        path: '/flashcards/:deck',
         icon: null
     },
     {

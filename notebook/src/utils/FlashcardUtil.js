@@ -1,3 +1,37 @@
-export const fetchFlashcards = (() => {
-    //
+import { db } from "../services/firebase"
+import { collection, doc, setDoc, query, getDocs, where } from "firebase/firestore";
+
+export const fetchFlashcards = (async(uid, deck) => {
+	const q = query(collection(db, "flashcards"),
+		where("uid", "==", uid),
+		where("deck", "==", deck)
+	);
+
+	const querySnapshot = await getDocs(q);
+	const data = [];
+	querySnapshot.forEach((doc) => {
+		const res = {
+			...doc.data(),
+			id: doc.id
+		} 
+		data.push(res);
+	});
+
+	return data;
+})
+
+export const fetchDecks = (async(uid) => {
+	const q = query(collection(db, "flashcards"), where("uid", "==", uid));
+
+	const querySnapshot = await getDocs(q);
+	const data = [];
+	querySnapshot.forEach((doc) => {
+		const deck = doc.data().deck;
+
+		if (!data.includes(deck)) {
+			data.push(deck);
+		}
+	});
+
+	return data;
 })

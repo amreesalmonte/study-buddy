@@ -32,7 +32,14 @@ const StyledLargeIcon = styled(LargeIcon)`
 `;
 
 export default function ReadFlashcards(props){
-	const { handleEdit, handleBack, handleReview } = props;
+	const { cards, deck, handleEdit, handleBack, handleReview } = props;
+
+	const getList = useCallback(() => {
+		return (
+			cards?.map((card, index) => (
+				<CardItem key={index}>{card.question}</CardItem>
+		)))
+	}, [cards])
 
 	return (
 		<FlashcardContainer>
@@ -41,11 +48,11 @@ export default function ReadFlashcards(props){
 				<Header>
 					<Title>
 					<StyledLargeIcon><Article/></StyledLargeIcon>
-					flashcards
+					{deck}
 					</Title>
 					<EditButton onClick={handleEdit}><Edit/></EditButton>
 				</Header>
-				<CardItem>is canada a country</CardItem>
+				{cards && getList()}
 		  </FlashcardContent>
 		  <Footer>
 				<PrimaryButton onClick={handleReview}>review</PrimaryButton>

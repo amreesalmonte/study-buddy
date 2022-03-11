@@ -1,9 +1,11 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useCallback, useEffect, useContext } from "react";
+import { NavLink } from 'react-router-dom';
+import UserContext from "../context/UserProvider";
 import styled from 'styled-components';
 import { Article } from '@mui/icons-material';
 import { colors } from "../styling/colors";
 import { PrimaryButton, Footer, ListItem} from "../styling/styles";
+import { fetchDecks } from "../utils/FlashcardUtil";
 
 const FlashcardsContainer = styled.div`
 	height: 100vh;
@@ -29,19 +31,39 @@ const Icon = styled.div`
 `;
 
 export default function FlashcardsListView(props){
-	let navigate = useNavigate();
+	const { user } = useContext(UserContext);
 
-	const handleSelect = useCallback(() => {
-		navigate('/flashcards/1');
-	}, [navigate])
+	const [initialLoad, setInitialLoad] = useState(true);
+	const [decks, setDecks] = useState();
+
+	const fetchData = useCallback(async() => {
+		const deckData = await fetchDecks(user.uid);
+		setDecks(deckData);
+	}, [user]) 
+
+	useEffect(() => {
+		if (initialLoad) {
+			fetchData();
+			setInitialLoad(false);
+		}
+	}, [initialLoad, fetchData]);
+
+	const getList = useCallback(() => {
+		return (
+			decks?.map((deck, index) => (
+				<NavLink key={index} to={`/flashcards/${deck}`} style={{textDecoration: 'none'}}>
+					<ListItem key={index} to={`/flashcards/${deck}`}>
+						<Icon><Article/></Icon>
+						{deck}
+					</ListItem>
+				</NavLink>
+		)))
+	}, [decks])
 
 	return (
 		<FlashcardsContainer>
 			<FlashcardsContent>
-				<ListItem onClick={handleSelect}>
-					<Icon><Article/></Icon>
-					flashcards
-				</ListItem>
+				{getList()}
 			</FlashcardsContent>
 			<Footer>
 				<PrimaryButton>create new</PrimaryButton>

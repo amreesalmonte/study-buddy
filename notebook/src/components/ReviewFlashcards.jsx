@@ -30,7 +30,7 @@ const StyledLargeIcon = styled(LargeIcon)`
 `;
 
 const IconButton = styled(LargeIcon)`
-	color: ${colors.purple};
+	color: ${props => props.disabled ? colors.grey01 : colors.purple};
 
   &:hover {
     transform: scale(1.05);
@@ -46,25 +46,34 @@ const StyledCard = styled(Card)`
 `;
 
 export default function ReviewFlashcards(props){
-	const { handleExit } = props;
+	const { cards, deck, handleExit } = props;
 
 	const [isFront, setIsFront] = useState(true);
-	const [text, setText] = useState('question');
+	const [text, setText] = useState(cards[0]?.question);
+	const [currentCard, setCurrentCard] = useState(cards[0]);
+	const [cardsLeft, setCardsLeft] = useState(cards);
 
 	const handleFlip = useCallback(() => {
 		if (isFront) {
 			setIsFront(false);
-			setText('answer') 
+			setText(currentCard?.answer) 
 		} else {
 			setIsFront(true);
-			setText('question') 
+			setText(currentCard?.question) 
 		};
-	}, [isFront])
+	}, [isFront, currentCard])
 
 	const handleNext = useCallback(() => {
-		setIsFront(true);  
-		setText('question') 
-	}, [])
+		if (cardsLeft.length > 1) { 
+			let newCards = cardsLeft.filter((card) => card?.id !== currentCard?.id);
+			let newCard = newCards[Math.floor(Math.random()*cardsLeft.length)];
+
+			setCardsLeft(newCards);
+			setCurrentCard(newCard);
+			setText(newCard?.question);
+			setIsFront(true); 
+		}
+	}, [currentCard, cardsLeft])
 
 	return (
 		<FlashcardContainer>
@@ -73,13 +82,13 @@ export default function ReviewFlashcards(props){
 				<Header>
 					<Title>
 					<StyledLargeIcon><Article/></StyledLargeIcon>
-					flashcards
+					{deck}
 					</Title>
 				</Header>
 				<StyledCard front={isFront}>{text}</StyledCard>
 				<StyledIconGroup>
           <IconButton><Loop onClick={handleFlip}/></IconButton>
-					<IconButton><SkipNext onClick={handleNext}/></IconButton>
+		  		<IconButton disabled={cardsLeft.length === 1}><SkipNext onClick={handleNext}/></IconButton>
         </StyledIconGroup>
 		  </FlashcardContent>
 		</FlashcardContainer>

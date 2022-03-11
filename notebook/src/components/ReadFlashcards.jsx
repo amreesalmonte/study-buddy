@@ -32,23 +32,23 @@ const StyledLargeIcon = styled(LargeIcon)`
 `;
 
 export default function ReadFlashcards(props){
-	const { handleEdit, handleBack } = props;
+	const { handleEdit, handleBack, handleReview } = props;
 
 	return (
 		<FlashcardContainer>
 		  <FlashcardContent>
-			<BackButton onClick={handleBack}><ArrowBack/>back</BackButton>
-			<Header>
-			  <Title>
-				<StyledLargeIcon><Article/></StyledLargeIcon>
-				flashcards
-			  </Title>
-			  <EditButton onClick={handleEdit}><Edit/></EditButton>
-			</Header>
-			<CardItem>is canada a country</CardItem>
+				<BackButton onClick={handleBack}><ArrowBack/>back</BackButton>
+				<Header>
+					<Title>
+					<StyledLargeIcon><Article/></StyledLargeIcon>
+					flashcards
+					</Title>
+					<EditButton onClick={handleEdit}><Edit/></EditButton>
+				</Header>
+				<CardItem>is canada a country</CardItem>
 		  </FlashcardContent>
 		  <Footer>
-				<PrimaryButton>review</PrimaryButton>
+				<PrimaryButton onClick={handleReview}>review</PrimaryButton>
 		  </Footer>
 		</FlashcardContainer>
 	);

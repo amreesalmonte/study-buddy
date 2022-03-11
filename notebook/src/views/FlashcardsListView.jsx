@@ -31,7 +31,7 @@ const Icon = styled.div`
 export default function FlashcardsListView(props){
 	let navigate = useNavigate();
 
-	const handleSelect = useCallback((title) => {
+	const handleSelect = useCallback(() => {
 		navigate('/flashcards/1');
 	}, [navigate])
 

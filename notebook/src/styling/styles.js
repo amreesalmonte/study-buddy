@@ -13,6 +13,11 @@ export const Footer = styled.div`
 	margin-left: 20%;
 `;
 
+export const IconGroup = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const SmallIcon = styled.div`
 	margin: 20px;
 	transition: .2s ease-in-out;
@@ -184,4 +189,16 @@ export const TextField = styled.input`
 		&:focus {
 			outline-color: ${colors.grey01};;
 		}
+`;
+
+export const Card = styled.div`
+	background-color: ${colors.grey01};
+	font-weight: bold;
+	font-size: 20px;
+	padding: 5px 10px;
+	margin: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 300px;
 `;

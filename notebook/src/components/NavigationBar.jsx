@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { colors } from "../styling/colors";
 import { RouteConfig } from "../config/RouteConfig";
 import TimerContext from "../context/TimerProvider";
-import { SmallIcon } from "../styling/styles";
+import { SmallIcon, IconGroup } from "../styling/styles";
 
 const NavigationBarContainer = styled.div`
 	display: flex;
@@ -23,11 +23,6 @@ const Title = styled.div`
   font-weight: bold;
   font-size: 30px;
   margin: 20px;
-`;
-
-const IconContainers = styled.div`
-  display: flex;
-  justify-content: center;
 `;
 
 const StyledSmallIcon = styled(SmallIcon)`
@@ -78,7 +73,7 @@ export default function NavigationBar(props){
   return (
     <NavigationBarContainer color={color}>
       <Title>notebook</Title>
-      <IconContainers>{getIcons()}</IconContainers>
+      <IconGroup>{getIcons()}</IconGroup>
       <Button>login</Button>
     </NavigationBarContainer>
   );

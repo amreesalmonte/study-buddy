@@ -8,10 +8,10 @@ export default function LoginButton() {
 	let navigate = useNavigate();
 	const { setUser } = useContext(UserContext);
 
-	const handleSignIn = useCallback(() => {
-		const uid = signInWithGoogle();
+	const handleSignIn = useCallback(async() => {
+		const uid = await signInWithGoogle();
 		setUser({
-			id: uid,
+			uid: uid,
 			isLoggedIn: true
 		})
 		navigate('/');

@@ -9,7 +9,7 @@ const ProjectsContainer = styled.div`
   flex-direction: column;
 `;
 
-export default function ProjectsView(props){
+export default function ProjectsListView(props){
 
   return (
       <ProjectsContainer>

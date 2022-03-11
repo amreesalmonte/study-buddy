@@ -22,7 +22,7 @@ const Icon = styled.div`
   }
 `;
 
-export default function FlashcardsView(props){
+export default function FlashcardsListView(props){
   return (
       <FlashcardsContainer>
         <ListItem>

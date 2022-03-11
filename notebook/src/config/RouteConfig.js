@@ -1,13 +1,13 @@
 import React from 'react';
-import ProjectsView from '../views/ProjectsView';
+import ProjectsListView from '../views/ProjectsListView';
 import PomodoroView from '../views/PomodoroView';
-import FlashcardsView from '../views/FlashcardsView';
+import FlashcardsListView from '../views/FlashcardsListView';
 import { Folder, Article, Timer } from '@mui/icons-material';
 
 export const RouteConfig = [
     {
         title: 'flashcards',
-        element: <FlashcardsView />,
+        element: <FlashcardsListView />,
         path: '/flashcards',
         icon: <Article />
     },
@@ -19,7 +19,7 @@ export const RouteConfig = [
     },
     {
         title: 'projects',
-        element: <ProjectsView />,
+        element: <ProjectsListView />,
         path: '/projects',
         icon: <Folder />
     }

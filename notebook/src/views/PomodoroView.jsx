@@ -7,7 +7,7 @@ import { LargeIcon, IconGroup } from "../styling/styles";
 
 const PomodoroContainer = styled.div`
   color: white;
-  background-color: ${colors.red};
+  background-color: ${props => props.timerColor};
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -33,6 +33,7 @@ export default function PomodoroView(props){
   const [isBreak, setIsBreak] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
+  const [timerColor, setTimerColor] = useState(colors.red);
 
   useEffect(()=> {
     if (initialLoad) {
@@ -53,9 +54,11 @@ export default function PomodoroView(props){
     if (isBreak) {
       setIsBreak(false)
       setTimer({color: colors.green})
+      setTimerColor(colors.green)
     } else {
       setIsBreak(true)
       setTimer({color: colors.red})
+      setTimerColor(colors.red)
     }
   }, [isBreak, setTimer]);
 
@@ -65,7 +68,7 @@ export default function PomodoroView(props){
   }, [toggleBreak]);
 
   return (
-      <PomodoroContainer>
+      <PomodoroContainer timerColor={timerColor}>
         <TimerText>25:00</TimerText>
         <IconGroup>
           {isActive ? 

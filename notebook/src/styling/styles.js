@@ -1,6 +1,31 @@
 import styled from 'styled-components';
 import { colors } from "../styling/colors";
 
+export const GoogleButton = styled.div`
+  width: 200px;
+  height: 30px;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: white;
+  color: ${colors.grey02};
+  border-radius: 10px;
+  margin: 20px;
+  transition: .2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+`;
+
 export const Footer = styled.div`
 	position: fixed;
 	width: 100%

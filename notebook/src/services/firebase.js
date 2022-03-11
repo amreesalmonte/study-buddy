@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
-import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getAuth, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZ74iVX8j2bstwI_4gqi9O1ILDTn-BLP0",
@@ -12,9 +12,25 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-export const signInWithGoogle = () => signInWithRedirect(auth, provider);
+export const signInWithGoogle = (() => {
+  signInWithPopup(auth, provider)
+    .then((res) => {
+      const uid = res.user.uid;
+      return uid;
+    }).catch((err) => {
+      console.log(err)
+    })
+});
+
+export const signOutWithGoogle = (() => {
+  signOut(auth).then((res) => {
+    console.log(res);
+  }).catch((err) => {
+    console.log(err);
+  });
+});

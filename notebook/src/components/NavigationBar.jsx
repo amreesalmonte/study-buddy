@@ -3,8 +3,11 @@ import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from "../styling/colors";
 import { RouteConfig } from "../config/RouteConfig";
+import UserContext from "../context/UserProvider";
 import TimerContext from "../context/TimerProvider";
 import { SmallIcon, IconGroup } from "../styling/styles";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
 
 const NavigationBarContainer = styled.div`
 	display: flex;
@@ -31,16 +34,9 @@ const StyledSmallIcon = styled(SmallIcon)`
   }
 `;
 
-const Button = styled.div`
-  width: 150px;
-  height: 30px;
-  background-color: white;
-  color: ${colors.purple};
-  margin: 20px;
-`;
-
 export default function NavigationBar(props){
   const { timer } = useContext(TimerContext);
+  const { user } = useContext(UserContext);
 
   const location = useLocation();
   const [color, setColor] = useState(null);
@@ -53,7 +49,7 @@ export default function NavigationBar(props){
     } 
   }, [location, timer]);
 
-  const getIcons = (()=> {
+  const getIcons = (() => {
     const routes = RouteConfig.filter((route) => {return route.icon !== null})
     return (
       routes.map((component, index) => 
@@ -73,8 +69,12 @@ export default function NavigationBar(props){
   return (
     <NavigationBarContainer color={color}>
       <Title>notebook</Title>
-      <IconGroup>{getIcons()}</IconGroup>
-      <Button>login</Button>
+      {user?.isLoggedIn && <IconGroup>{getIcons()}</IconGroup>}
+      {
+        user?.isLoggedIn ? 
+        <LogoutButton/> :
+        <LoginButton/>
+      }
     </NavigationBarContainer>
   );
 }
